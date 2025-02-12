@@ -2,21 +2,26 @@ import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/commo
 import { UserService } from './user.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
+import { ApiResponse, ApiTags } from '@nestjs/swagger';
 
+@ApiTags("User API")
 @Controller('user')
 export class UserController {
   constructor(private readonly userService: UserService) {}
 
+  @ApiResponse({status: 201, description: "The record has been successfully created"})
   @Post()
   create(@Body() createUserDto: CreateUserDto) {
     return this.userService.create(createUserDto);
   }
 
+  @ApiResponse({status: 200, description: "Success request"})
   @Get()
   findAll() {
     return this.userService.findAll();
   }
 
+  @ApiResponse({status: 200, description: "Success request"})
   @Get(':id')
   findOne(@Param('id') id: string) {
     return this.userService.findOne(+id);

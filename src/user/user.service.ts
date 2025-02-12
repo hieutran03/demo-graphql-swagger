@@ -27,7 +27,8 @@ export class UserService {
 
   findOne(id: number) {
     return this.userRepository.find({
-      where: {id}
+      where: {id},
+      relations: {orders: true}
     })
   }
 
