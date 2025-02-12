@@ -3,7 +3,10 @@ import { PostService } from './post.service';
 import { Post } from './entities/post.entity';
 import { CreatePostInput } from './dto/create-post.input';
 import { UpdatePostInput } from './dto/update-post.input';
+import { UseFilters } from '@nestjs/common';
+import { HttpExceptionFilter } from 'src/filters/http-exception.filter';
 
+@UseFilters(HttpExceptionFilter)
 @Resolver(() => Post)
 export class PostResolver {
   constructor(private readonly postService: PostService) {}

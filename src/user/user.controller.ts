@@ -1,10 +1,12 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, UseFilters } from '@nestjs/common';
 import { UserService } from './user.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { ApiResponse, ApiTags } from '@nestjs/swagger';
+import { HttpExceptionFilter } from 'src/filters/http-exception.filter';
 
 @ApiTags("User API")
+@UseFilters(HttpExceptionFilter)
 @Controller('user')
 export class UserController {
   constructor(private readonly userService: UserService) {}
@@ -22,6 +24,7 @@ export class UserController {
   }
 
   @ApiResponse({status: 200, description: "Success request"})
+  @ApiResponse({status: 404, description: "Not found resource"})
   @Get(':id')
   findOne(@Param('id') id: string) {
     return this.userService.findOne(+id);

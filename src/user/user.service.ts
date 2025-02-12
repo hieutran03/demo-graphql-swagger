@@ -5,6 +5,7 @@ import { Repository } from 'typeorm';
 import { User } from './entities/user.entity';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Order } from './entities/order.entity';
+import { NotFoundException } from 'src/exceptions/not-found.exeption';
 
 @Injectable()
 export class UserService {
@@ -25,11 +26,15 @@ export class UserService {
     });
   }
 
-  findOne(id: number) {
-    return this.userRepository.find({
+  async findOne(id: number) {
+    const res = await this.userRepository.findOne({
       where: {id},
       relations: {orders: true}
     })
+
+    if(!res)
+      throw new NotFoundException;
+    return res;
   }
 
   update(id: number, updateUserDto: UpdateUserDto) {

@@ -5,6 +5,7 @@ import { Repository } from 'typeorm';
 import { Post } from './entities/post.entity';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Comment } from './entities/comment.entity';
+import { NotFoundException } from 'src/exceptions/not-found.exeption';
 
 @Injectable()
 export class PostService {
@@ -29,7 +30,13 @@ export class PostService {
   }
 
   async findOne(id: number) {
-    return await this.postRepository.find({where:{id}})
+    const res = await this.postRepository.findOne({
+        where:{id},
+        relations: {comments: true}
+      })
+    if(!res)
+      throw new NotFoundException();
+    return res;
   }
 
   update(id: number, updatePostInput: UpdatePostInput) {
