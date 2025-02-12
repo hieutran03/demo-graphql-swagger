@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
-import { CreatePostInput } from './dto/createPost.input';
-import { UpdatePostInput } from './dto/updatePost.input';
+import { CreatePostInput } from './dto/create-post.input';
+import { UpdatePostInput } from './dto/update-post.input';
 import { Repository } from 'typeorm';
 import { Post } from './entities/post.entity';
 import { InjectRepository } from '@nestjs/typeorm';

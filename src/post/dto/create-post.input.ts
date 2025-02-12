@@ -1,5 +1,5 @@
 import { InputType, Field } from '@nestjs/graphql';
-import { CreateCommentInput } from './createComment.input';
+import { CreateCommentInput } from './create-comment.input';
 import { IsArray, IsObject, IsString } from 'class-validator';
 
 @InputType()
