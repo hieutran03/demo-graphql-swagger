@@ -7,6 +7,6 @@ export class User extends AbstractEntity<User>{
   @Column()
   name: string;
   
-  @OneToMany(()=>Order, (order)=>order.user)
+  @OneToMany(()=>Order, (order)=>order.user, {cascade: true})
   orders: Order[];
 }
