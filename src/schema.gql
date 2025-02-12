@@ -1,0 +1,33 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type Comment {
+  id: Int!
+  content: String!
+  post: Post
+}
+
+type Post {
+  id: Int!
+  title: String!
+  comments: [Comment!]
+}
+
+type Query {
+  posts: [Post!]!
+  post(id: Int!): Post!
+}
+
+type Mutation {
+  createPost(createPostInput: CreatePostInput!): Post!
+}
+
+input CreatePostInput {
+  title: String!
+  comments: [CreateCommentInput!]!
+}
+
+input CreateCommentInput {
+  content: String!
+}
